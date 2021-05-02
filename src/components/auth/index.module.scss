@@ -1,0 +1,38 @@
+.auth_modal {
+    max-width: 400px;
+    :global {
+        .ant-modal-content {
+            border-radius: 6px;
+        }
+        .ant-modal-header {
+            border-radius: 6px 6px 0px 0px;
+        }
+    }
+}
+
+.auth_form {
+    :global {
+        .ant-input-affix-wrapper {
+            border-radius: 6px;
+        }
+    }
+}
+
+.login_form_forgot {
+    float: right;
+}
+
+.login_button {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.register_button {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.login_google_button {
+    width: 100%;
+    border-radius: 6px;
+}
