@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { getAttendeesAPI } from "../../../../api/events/events.api";
 import { withRouter } from "react-router-dom";
-import { message, Row, Col, Card, Tooltip, Pagination } from "antd";
+import { message, Row, Col, Card, Pagination } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
@@ -9,7 +10,7 @@ class Attendees extends Component {
   state = {
     attendees: [],
     page: 1,
-    pageSize: 12
+    pageSize: 12,
   };
 
   componentDidMount = async () => {
@@ -30,14 +31,17 @@ class Attendees extends Component {
   };
 
   handlePageChange = (page) => {
-      this.setState({
-          page: page
-      });
+    this.setState({
+      page: page,
+    });
   };
 
   render() {
     const { attendees, page, pageSize } = this.state;
-    const attendeesByPage = attendees.slice(pageSize * page- pageSize, pageSize * page);
+    const attendeesByPage = attendees.slice(
+      pageSize * page - pageSize,
+      pageSize * page
+    );
 
     return (
       <>
@@ -52,21 +56,18 @@ class Attendees extends Component {
               <Col sm={24} md={12} lg={8} xl={6} xxl={4}>
                 <Card
                   style={{ width: 220, marginBottom: 20 }}
-                  cover={<img alt={attendee.name} src={attendee.photoURL} />}
+                  cover={
+                    attendee.photoURL ? (
+                      <img alt={attendee.name} src={attendee.photoURL} />
+                    ) : (
+                      <UserOutlined style={{ fontSize: "220px" }} />
+                    )
+                  }
                 >
                   <Meta
-                    title={
-                      <Tooltip title={attendee.name}>{attendee.name}</Tooltip>
-                    }
+                    title={attendee.name}
                     description={
-                      <a
-                        href={`mailto:${attendee.email}`}
-                        style={{ color: "rgba(0, 0, 0, 0.45)" }}
-                      >
-                        <Tooltip title={attendee.email} placement="bottom">
-                          {attendee.email}
-                        </Tooltip>
-                      </a>
+                      <a href={`mailto:${attendee.email}`}>{attendee.email}</a>
                     }
                   />
                 </Card>
@@ -77,7 +78,12 @@ class Attendees extends Component {
         <Row>
           <Col span={24}>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Pagination current={page} total={attendees.length} pageSize={pageSize} onChange={this.handlePageChange} />
+              <Pagination
+                current={page}
+                total={attendees.length}
+                pageSize={pageSize}
+                onChange={this.handlePageChange}
+              />
             </div>
           </Col>
         </Row>

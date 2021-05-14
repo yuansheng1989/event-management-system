@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Button, Modal, Rate } from 'antd';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
-import { addRate } from '../../../redux/events/actions';
+import { addRate, addAttendee } from '../../../redux/events/actions';
 
 class EventJoining extends Component {
     state = {
@@ -22,6 +22,23 @@ class EventJoining extends Component {
     handleRateChange= (value) => {
         this.setState({
             rate: value
+        });
+    }
+
+    joinEventClick = () => {
+        Modal.confirm({
+            title: 'Are you sure you want to join this event?',
+            centered: true,
+            className: styles.join_modal,
+            okText: 'Join',
+            onOk: () => {
+                this.props.addAttendee({
+                    EventId: this.props.events[0].eventId,
+                    name: this.props.user.name,
+                    photoURL: this.props.user.photoURL,
+                    email: this.props.user.email
+                });
+            }
         });
     }
 
@@ -61,6 +78,7 @@ class EventJoining extends Component {
                             borderRadius:"6px",
                             width: "150px"
                         }}
+                        onClick={this.joinEventClick}
                     >
                         JOIN THIS EVENT
                     </Button>
@@ -110,4 +128,4 @@ class EventJoining extends Component {
     }
 }
 
-export default connect(null, { addRate })(EventJoining);
+export default connect(null, { addRate, addAttendee })(EventJoining);

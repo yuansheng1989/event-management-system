@@ -25,3 +25,13 @@ export const getHostsAPI = async ({eventId}) => {
         throw error;
     }
 }
+
+export const addHostAPI = async (host) => {
+    try {
+        let url = EVENTS_URL;
+        const res = await axios.post(url, host);
+        return res;
+    } catch (error) {
+        throw error;
+    }
+};

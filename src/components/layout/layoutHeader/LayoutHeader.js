@@ -10,6 +10,7 @@ import {
 import AuthModal from '../../auth/AuthModal';
 import { connect } from 'react-redux';
 import { logout, toggleAuthModal } from '../../../redux/auth/actions';
+import { setSiderMenu  } from '../../../redux/layout/actions';
 
 const { Header } = Layout;
 
@@ -40,6 +41,7 @@ class LayoutHeader extends Component {
           <a onClick={
             e => {
               e.preventDefault();
+              this.props.setSiderMenu("1");
               this.props.logout();
             }
           }>
@@ -80,4 +82,4 @@ class LayoutHeader extends Component {
   }
 }
 
-export default connect(mapStateToProps, { logout, toggleAuthModal })(LayoutHeader);
+export default connect(mapStateToProps, { logout, toggleAuthModal, setSiderMenu })(LayoutHeader);

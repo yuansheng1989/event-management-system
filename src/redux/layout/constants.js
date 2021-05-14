@@ -1,0 +1,1 @@
+export const SET_SIDER_MENU = "SET_SIDER_MENU";

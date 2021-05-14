@@ -92,3 +92,23 @@ export const getAttendeesAPI = async ({ eventId }) => {
         throw error;
     }
 };
+
+export const addAttendeeAPI = async (attendee) => {
+    try {
+        let url = `${EVENTS_URL}/${attendee.EventId}/Attendees`;
+        const res = await axios.post(url, attendee);
+        return res;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const addEventAPI = async (event) => {
+    try {
+        let url = EVENTS_URL;
+        const res = await axios.post(url, event);
+        return res;
+    } catch (error) {
+        throw error;
+    }
+}

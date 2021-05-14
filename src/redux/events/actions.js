@@ -7,7 +7,14 @@ import {
     ADD_COMMENT_FAILURE,
     ADD_RATE,
     ADD_RATE_SUCCESS,
-    ADD_RATE_FAILURE
+    ADD_RATE_FAILURE,
+    ADD_ATTENDEE,
+    ADD_ATTENDEE_SUCCESS,
+    ADD_ATTENDEE_FAILURE,
+    ADD_EVENT,
+    ADD_EVENT_SUCCESS,
+    ADD_EVENT_FAILURE,
+    CLEAR_EVENTS
 } from "./constants";
   
 export const fetchEvents = (search) => {
@@ -86,5 +93,58 @@ export const addRateFailure = () => {
     type: ADD_RATE_FAILURE
   };
 
+  return action;
+};
+
+export const addAttendee = (attendee) => {
+  const action = {
+    type: ADD_ATTENDEE,
+    payload: attendee
+  };
+  return action;
+};
+
+export const addAttendeeSuccess = (attendee) => {
+  const action = {
+    type: ADD_ATTENDEE_SUCCESS,
+    payload: attendee
+  };
+  return action;
+};
+
+export const addAttendeeFailure = () => {
+  const action = {
+    type: ADD_ATTENDEE_FAILURE
+  };
+  return action;
+};
+
+export const addEvent = (obj) => {
+  const action = {
+    type: ADD_EVENT,
+    payload: obj
+  };
+  return action;
+};
+
+export const addEventSuccess = (event) => {
+  const action = {
+    type: ADD_EVENT_SUCCESS,
+    payload: event
+  };
+  return action;
+}
+
+export const addEventFailure = () => {
+  const action = {
+    type: ADD_EVENT_FAILURE
+  };
+  return action;
+};
+
+export const clearEvents = () => {
+  const action = {
+    type: CLEAR_EVENTS
+  };
   return action;
 };

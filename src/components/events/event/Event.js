@@ -9,6 +9,7 @@ import {withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchEvents } from '../../../redux/events/actions';
 import { fetchHosts } from '../../../redux/hosts/actions';
+import { setSiderMenu } from "../../../redux/layout/actions";
 
 const mapStateToProps = (state) => {
     return {
@@ -24,6 +25,7 @@ class Event extends Component {
     componentDidMount = () => {
         this.props.fetchEvents({eventId: this.props.match.params.eventId});
         this.props.fetchHosts({eventId: this.props.match.params.eventId});
+        this.props.setSiderMenu("1");
     }
 
     render() {
@@ -37,6 +39,7 @@ class Event extends Component {
                                 hosts={this.props.hosts}
                                 eventsLoading={this.props.eventsLoading}
                                 hostsLoading={this.props.hostsLoading}
+                                user={this.props.user}
                             />
                         </Col>
                     </Row>
@@ -75,4 +78,4 @@ class Event extends Component {
     }
 }
 
-export default connect(mapStateToProps, {fetchEvents, fetchHosts})(withRouter(Event));
+export default connect(mapStateToProps, {fetchEvents, fetchHosts, setSiderMenu})(withRouter(Event));

@@ -107,13 +107,8 @@ class EventInfo extends Component {
                             events &&
                             <Button
                                 onClick={this.handleSeeMoreClick}
-                                type="primary"
-                                style={{
-                                    backgroundColor: "#13a9b0",
-                                    borderColor: "#13a9b0",
-                                    borderRadius:" 6px",
-                                    width: "100px"
-                                }}
+                                type="text"
+                                style={{color: "#1890ff"}}
                             >
                                 See more
                             </Button>

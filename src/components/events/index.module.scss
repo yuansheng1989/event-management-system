@@ -132,6 +132,18 @@
     }
 }
 
+.join_modal {
+    :global {
+        .ant-modal-content {
+            border-radius: 6px;
+        }
+        .ant-btn {
+            width: 100px;
+            border-radius: 6px;
+        }
+    }
+}
+
 .rate_modal {
     :global {
         .ant-modal-content {
