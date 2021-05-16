@@ -14,7 +14,11 @@ import {
     ADD_EVENT,
     ADD_EVENT_SUCCESS,
     ADD_EVENT_FAILURE,
-    CLEAR_EVENTS
+    CLEAR_EVENTS,
+    EDIT_EVENT,
+    EDIT_EVENT_SUCCESS,
+    EDIT_EVENT_FAILURE,
+    CLEAR_EDIT_EVENT_ID
 } from "./constants";
   
 export const fetchEvents = (search) => {
@@ -148,3 +152,33 @@ export const clearEvents = () => {
   };
   return action;
 };
+
+export const editEvent = (obj) => {
+  const action = {
+    type: EDIT_EVENT,
+    payload: obj
+  };
+  return action;
+};
+
+export const editEventSuccess = (event) => {
+  const action = {
+    type: EDIT_EVENT_SUCCESS,
+    payload: event
+  }
+  return action;
+};
+
+export const editEventFailure = () => {
+  const action = {
+    type: EDIT_EVENT_FAILURE
+  };
+  return action;
+};
+
+export const clearEditEventId = () => {
+  const action = {
+    type: CLEAR_EDIT_EVENT_ID
+  };
+  return action;
+}

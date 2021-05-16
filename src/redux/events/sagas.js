@@ -1,5 +1,5 @@
 import { all, takeEvery, call, put } from "redux-saga/effects";
-import { FETCH_EVENTS, ADD_COMMENT, ADD_RATE, ADD_ATTENDEE, ADD_EVENT } from "./constants";
+import { FETCH_EVENTS, ADD_COMMENT, ADD_RATE, ADD_ATTENDEE, ADD_EVENT, EDIT_EVENT } from "./constants";
 import { 
   fetchEventsSuccess,
   fetchEventsFailure,
@@ -11,9 +11,11 @@ import {
   addAttendeeFailure,
   addEventSuccess,
   addEventFailure,
+  editEventSuccess,
+  editEventFailure
 } from "./actions";
 import { addHost } from "../hosts/actions";
-import { getEventsAPI, addCommentAPI, addRateAPI, addAttendeeAPI, addEventAPI } from "../../api/events/events.api";
+import { getEventsAPI, addCommentAPI, addRateAPI, addAttendeeAPI, addEventAPI, editEventAPI } from "../../api/events/events.api";
 import { message } from "antd";
 import "antd/dist/antd.css";
 
@@ -109,12 +111,30 @@ function* addEvent(action) {
   }
 }
 
+function* editEvent(action) {
+  try {
+    const response = yield call(editEventAPI, action.payload);
+    if (response.data) {
+      const event = {...response.data, attendees: [], comments: [], rate: []};
+      yield put(editEventSuccess(event));
+      message.success("Edit event successfully.");
+    } else {
+      message.error("Fail to edit event.");
+      yield put(editEventFailure());
+    }
+  } catch (error) {
+    message.error("Fail to edit event.");
+    yield put(editEventFailure());
+  }
+}
+
 export default function* eventsSaga() {
   yield all([
     takeEvery(FETCH_EVENTS, getEvents),
     takeEvery(ADD_COMMENT, addComment),
     takeEvery(ADD_RATE, addRate),
     takeEvery(ADD_ATTENDEE, addAttendee),
-    takeEvery(ADD_EVENT, addEvent)
+    takeEvery(ADD_EVENT, addEvent),
+    takeEvery(EDIT_EVENT, editEvent)
   ]);
 }

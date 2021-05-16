@@ -14,11 +14,16 @@ import {
   ADD_EVENT,
   ADD_EVENT_SUCCESS,
   ADD_EVENT_FAILURE,
-  CLEAR_EVENTS
+  CLEAR_EVENTS,
+  EDIT_EVENT,
+  EDIT_EVENT_SUCCESS,
+  EDIT_EVENT_FAILURE,
+  CLEAR_EDIT_EVENT_ID
 } from "./constants";
 
 const initState = {
   events: "",
+  editEventId: "",
   loading: false,
 };
 
@@ -123,6 +128,28 @@ const eventsReducer = (state = initState, action) => {
       return {
         ...state,
         events: ""
+      };
+    case EDIT_EVENT:
+      return {
+        ...state,
+        loading: true
+      };
+    case EDIT_EVENT_SUCCESS:
+      newEvents = [action.payload];
+      return {
+        events: newEvents,
+        editEventId: action.payload.eventId,
+        loading: false,
+      };
+    case EDIT_EVENT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+    case CLEAR_EDIT_EVENT_ID:
+      return {
+        ...state,
+        editEventId: ""
       };
     default:
       return state;

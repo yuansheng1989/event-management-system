@@ -60,11 +60,11 @@ const Profile = (props) => {
       dataIndex: "date",
       key: "date",
     },
-    // {
-    //   title: "Action",
-    //   key: "action",
-    //   render: (text, record) => <Link to={`/Events/${record.key}/edit`}>Edit</Link>,
-    // },
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => <Link to={`/Events/${record.key}/edit`}>Edit</Link>,
+    },
   ];
 
   return (

@@ -111,4 +111,14 @@ export const addEventAPI = async (event) => {
     } catch (error) {
         throw error;
     }
-}
+};
+
+export const editEventAPI = async (event) => {
+    try {
+        let url = `${EVENTS_URL}/${event.eventId}`;
+        const res = await axios.put(url, event);
+        return res;
+    } catch (error) {
+        throw error;
+    }
+};
